@@ -35,6 +35,11 @@ $border-white-2: $white 2px solid;
       margin-left: auto;
       border-bottom: $white 2px solid;
       padding: 0 10px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        padding: 0 30px;
+      }
     }
 
     .close {
