@@ -14,7 +14,15 @@ process.env.PUBLIC = app.isPackaged
   ? process.env.DIST
   : join(process.env.DIST_ELECTRON, "../public");
 
-import { app, BrowserWindow, shell, ipcMain } from "electron";
+import {
+  app,
+  BrowserWindow,
+  shell,
+  ipcMain,
+  Tray,
+  Menu,
+  nativeImage,
+} from "electron";
 import { release } from "os";
 import { join } from "path";
 
@@ -30,11 +38,14 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 let win: BrowserWindow | null = null;
+const BrowserWindowsMap = new Map<number, BrowserWindow>();
 // Here, you can also use other preload
 const preload = join(__dirname, "../preload/index.js");
 const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
 
+let tray: Tray;
+let mainWindowId: number;
 async function createWindow() {
   win = new BrowserWindow({
     width: 768,
@@ -50,6 +61,8 @@ async function createWindow() {
       contextIsolation: false,
     },
   });
+  mainWindowId = win.id;
+  BrowserWindowsMap.set(win.id, win);
 
   if (process.env.VITE_DEV_SERVER_URL) {
     // electron-vite-vue#298
@@ -69,6 +82,50 @@ async function createWindow() {
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith("https:")) shell.openExternal(url);
     return { action: "deny" };
+  });
+  win.on("close", (event) => {
+    // 如果关闭的是主窗口，阻止，并仅仅隐藏
+    if (win.id === mainWindowId) {
+      event.preventDefault();
+      win.hide();
+    }
+  });
+
+  /* 托盘设置 */
+  const icon = nativeImage.createFromPath(
+    join(process.env.PUBLIC, "electron.png")
+  );
+  tray = new Tray(icon);
+  const mainWindow = BrowserWindowsMap.get(mainWindowId);
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: "打开设置",
+      click: () => {
+        if (mainWindow) {
+          mainWindow.restore();
+          mainWindow.show();
+        }
+      },
+    },
+    {
+      label: "离开",
+      click: () => {
+        if (mainWindow) {
+          mainWindowId = -1;
+          mainWindow.close();
+        }
+        tray.destroy();
+      },
+    },
+  ]);
+  tray.setContextMenu(contextMenu);
+  tray.setToolTip("休息助手");
+  tray.setTitle("休息助手");
+  tray.on("double-click", () => {
+    if (mainWindow) {
+      mainWindow.restore();
+      mainWindow.show();
+    }
   });
 }
 
@@ -105,10 +162,13 @@ ipcMain.handle("open-win", (event, arg) => {
       contextIsolation: false,
     },
   });
-
   if (process.env.VITE_DEV_SERVER_URL) {
     childWindow.loadURL(`${url}#${arg}`);
   } else {
     childWindow.loadFile(indexHtml, { hash: arg });
   }
+});
+/* 渲染进程中自定义按钮事件：关闭窗口 */
+ipcMain.on("clickClose", () => {
+  app.quit();
 });
