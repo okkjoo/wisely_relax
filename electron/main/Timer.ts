@@ -94,3 +94,17 @@ class Timer {
     this.timer && clearInterval(this.timer);
   }
 }
+/* 主代码 */
+const t = new Timer();
+process.on("message", (message: ReceiveMsg) => {
+  if (!Array.isArray(message)) {
+    message = [message];
+  }
+  message.forEach((msg) => {
+    if (msg.type === "setTime") {
+      t[msg.type](msg.data);
+    } else {
+      t[msg.type]();
+    }
+  });
+});
