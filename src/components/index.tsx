@@ -1,7 +1,7 @@
-import Setting from "./setting";
-import Show from "./show";
-import SmartWarn from "./smartWarn";
-import TimerWarn from "./timerWarn";
+import Setting from "./Setting";
+import Show from "./Show";
+import SmartWarn from "./SmartWarn";
+import TimerWarn from "./TimerWarn";
 import Header from "./Header";
 
 export { Header, Setting, Show, SmartWarn, TimerWarn };
