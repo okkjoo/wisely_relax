@@ -7,7 +7,6 @@ const SmartWarn: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTime(e.target.value);
     if (time === "") {
-      e.target.value = "1";
       setTime("1");
     }
   };
