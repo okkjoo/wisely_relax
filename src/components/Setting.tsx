@@ -3,7 +3,11 @@ import styles from "styles/app.module.scss";
 const Setting: React.FC = () => {
   const [archiveFlag, setArchiveFlag] = useState(true);
   const [textFoucsFlag, setTextFoucsFlag] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(`record doing something
+for example :
+Writing the personal Settings module
+...
+  `);
   const [inputs, setInputs] = useState(["do1", "do2", "do3", "do4", "do5"]);
   const handleArchiveFlag = () => {
     setArchiveFlag(!archiveFlag);
