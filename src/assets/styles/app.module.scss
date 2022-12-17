@@ -1,3 +1,4 @@
+$green-8: rgb(9, 200, 105);
 $green-10: #028041;
 $green-11: #186100;
 $white: #ffffff;
@@ -103,13 +104,51 @@ $border-grey-1: $grey 1px solid;
       grid-area: middle;
 
       .archiveText {
-        height: 20%;
+        height: 10%;
         color: $grey-10;
         padding: 10px;
         transition: all 0.2s ease;
+        resize: none;
+        overflow-y: hidden;
+        text-overflow: ellipsis;
+        outline-style: none;
+        border: 1px solid $grey;
+        border-radius: 3px;
+        color: $green-8;
+        transition: all 0.2s ease;
+        font-weight: bold;
 
         &:focus {
-          height: 50%;
+          color: $green-10;
+          height: 40%;
+          border: 2px solid rgba(102, 175, 233, .6)
+        }
+      }
+
+      .restSelect {
+        margin: 10px auto;
+        width: 85%;
+        height: 60%;
+        border: $border-white-2;
+        border-radius: 20px;
+        transition: all 0.2s ease;
+        overflow: hidden;
+
+        &.short {
+          height: 30%;
+        }
+      }
+
+      .inputItem {
+        .itembtn {
+          display: inline-block;
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            transform: scale(1.1, 1.1);
+          }
         }
       }
     }
@@ -139,9 +178,23 @@ input {
   border-radius: 3px;
   margin: 0 5px;
   width: 25%;
+  font-weight: bold;
+  color: $green-8;
+  transition: all 0.2s ease;
+
+  &:focus {
+    color: $green-10;
+    transform: scale(1.1, 1.1);
+  }
 
   &[type="checkbox"] {
     width: auto;
+  }
+
+  &.restSelectItem {
+    width: 60%;
+    padding: 5px 10px;
+    margin-bottom: 10px;
   }
 }
 
@@ -153,7 +206,6 @@ label {
   input:focus {
     border-color: #66afe9;
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
   }
 }
