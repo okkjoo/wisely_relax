@@ -93,7 +93,7 @@ async function createWindow() {
 
   /* 托盘设置 */
   const icon = nativeImage.createFromPath(
-    join(process.env.PUBLIC, "electron.png")
+    join(process.env.PUBLIC, "favicon.ico")
   );
   tray = new Tray(icon);
   const mainWindow = BrowserWindowsMap.get(mainWindowId);

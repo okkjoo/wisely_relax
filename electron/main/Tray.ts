@@ -25,7 +25,7 @@ class Tray {
   }
 
   // 初始化托盘栏，并传入托盘图标
-  private tray: eTray = new eTray(path.resolve(__dirname, "electron.png"));
+  private tray: eTray = new eTray(path.resolve(__dirname, "favicon.ico"));
   // 标示当前时间为工作时间或休息时间
   private timeType: TimeType = "WORK";
   // 菜单实例
