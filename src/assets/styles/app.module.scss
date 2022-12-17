@@ -81,10 +81,20 @@ $border-white-2: $white 2px solid;
 
     .left_up {
       grid-area: left_up;
+      padding-bottom: 20px;
     }
 
     .left_down {
       grid-area: left_down;
+      margin-top: 0px;
+
+      .clockItem {
+        margin: 10px;
+
+        input {
+          width: 90%;
+        }
+      }
     }
 
     .middle {
