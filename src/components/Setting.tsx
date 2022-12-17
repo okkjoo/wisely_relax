@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { cloneMap } from "@/utils/cloneMap";
 import styles from "styles/app.module.scss";
-const Setting: React.FC = () => {
+
+interface ISetting {
+  thing2cnt: Map<string, number>;
+  setThing2cnt: React.Dispatch<React.SetStateAction<Map<any, any>>>;
+}
+const Setting: React.FC<ISetting> = ({ thing2cnt, setThing2cnt }) => {
   const [archiveFlag, setArchiveFlag] = useState(true);
   const [textFoucsFlag, setTextFoucsFlag] = useState(false);
   const [text, setText] = useState(`record doing something
@@ -8,7 +14,13 @@ for example :
 Writing the personal Settings module
 ...
   `);
-  const [inputs, setInputs] = useState(["do1", "do2", "do3", "do4", "do5"]);
+  const [inputs, setInputs] = useState([
+    "to drink",
+    "to exercise",
+    "to chat",
+    "do4",
+    "do5",
+  ]);
   const handleArchiveFlag = () => {
     setArchiveFlag(!archiveFlag);
   };
@@ -21,15 +33,16 @@ Writing the personal Settings module
   const handleChangeInput =
     (idx: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const newClocks = [...inputs];
-      newClocks.splice(idx, 1, e.target.value);
+      const lastValue = newClocks.splice(idx, 1, e.target.value)[0];
+      thing2cnt.delete(lastValue);
       setInputs(newClocks);
     };
-  const thing2cnt = new Map();
   const handleClickAddBtn = (idx: number) => () => {
     const thing = inputs[idx];
-    if (!thing2cnt.get(thing)) thing2cnt.set(thing, 1);
-    thing2cnt.set(thing, thing2cnt.get(thing) + 1);
-    console.log(thing2cnt);
+    if (!thing2cnt.get(thing)) thing2cnt.set(thing, 0);
+    thing2cnt.set(thing, thing2cnt.get(thing)! + 1);
+    thing2cnt = cloneMap(thing2cnt);
+    setThing2cnt(cloneMap(thing2cnt));
   };
   return (
     <div className={styles.middle}>

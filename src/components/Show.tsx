@@ -1,17 +1,22 @@
 import styles from "styles/app.module.scss";
 import Chart from "./echarts";
 import Clock from "./echarts/Clock";
-const Show: React.FC = () => {
+interface IShow {
+  thing2cnt: Map<string, number>;
+}
+const Show: React.FC<IShow> = ({ thing2cnt }) => {
+  const Xdata = [...thing2cnt.keys()];
+  const Ydata = [...thing2cnt.values()];
   const option = {
     title: {
-      text: "近七天休息情况",
+      text: "do something",
     },
     tooltip: {},
     legend: {
-      data: ["销量"],
+      data: ["次数"],
     },
     xAxis: {
-      data: ["day1", "day2", "day3", "day4", "day5", "day6", "day7"],
+      data: Xdata,
       axisLabel: {
         interval: 0, //横轴信息全部显示
         rotate: -30, //-30度角倾斜显示
@@ -27,9 +32,9 @@ const Show: React.FC = () => {
     },
     series: [
       {
-        name: "销量",
+        name: "次数",
         type: "bar",
-        data: [22, 20, 36, 10, 10, 20, 30],
+        data: Ydata,
         label: {
           show: true,
           position: "top",
