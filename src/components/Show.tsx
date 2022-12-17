@@ -22,7 +22,9 @@ const Show: React.FC = () => {
         },
       },
     },
-    yAxis: {},
+    yAxis: {
+      show: false,
+    },
     series: [
       {
         name: "销量",

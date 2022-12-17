@@ -105,6 +105,7 @@ $border-grey-1: $grey 1px solid;
 
       .archiveText {
         height: 10%;
+        width: 70%;
         color: $grey-10;
         padding: 10px;
         transition: all 0.2s ease;
@@ -120,6 +121,7 @@ $border-grey-1: $grey 1px solid;
 
         &:focus {
           color: $green-10;
+          width: 80%;
           height: 40%;
           border: 2px solid rgba(102, 175, 233, .6)
         }
