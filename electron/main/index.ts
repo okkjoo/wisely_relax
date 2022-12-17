@@ -122,7 +122,6 @@ async function createWindow() {
   tray.setToolTip("休息助手");
   tray.setTitle("休息助手");
   tray.on("double-click", () => {
-    console.log(mainWindowId, BrowserWindowsMap);
     if (mainWindow) {
       mainWindow.restore();
       mainWindow.show();
@@ -131,10 +130,6 @@ async function createWindow() {
 
   /* 点击浮窗展示主窗口 */
   ipcMain.on("showMainWindow", () => {
-    console.log("11????");
-    console.log(mainWindowId);
-    console.log(BrowserWindowsMap);
-    console.log(mainWindow);
     if (mainWindow) {
       mainWindow.restore();
       mainWindow.show();
