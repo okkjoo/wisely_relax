@@ -2,7 +2,9 @@ $green-10: #028041;
 $green-11: #186100;
 $white: #ffffff;
 $grey: #ccc;
+$grey-10: rgb(112, 108, 108);
 $border-white-2: $white 2px solid;
+$border-grey-1: $grey 1px solid;
 
 .app {
   border-radius: 15px;
@@ -99,6 +101,17 @@ $border-white-2: $white 2px solid;
 
     .middle {
       grid-area: middle;
+
+      .archiveText {
+        height: 20%;
+        color: $grey-10;
+        padding: 10px;
+        transition: all 0.2s ease;
+
+        &:focus {
+          height: 50%;
+        }
+      }
     }
 
     .right {
@@ -126,6 +139,10 @@ input {
   border-radius: 3px;
   margin: 0 5px;
   width: 25%;
+
+  &[type="checkbox"] {
+    width: auto;
+  }
 }
 
 label {
