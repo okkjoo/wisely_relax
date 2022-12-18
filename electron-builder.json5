@@ -2,25 +2,18 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  appId: "YourAppID",
-  productName: "YourAppName",
+  appId: "wisely-relax",
+  productName: "wisely-relax",
   copyright: "Copyright © 2022 ${author}",
   asar: true,
   directories: {
     output: "release/${version}",
     buildResources: "electron/resources",
   },
-  files: [
-    "dist-electron",
-    "dist"
-  ],
+  files: ["dist-electron", "dist"],
   win: {
-    target: [
-      {
-        target: "nsis",
-        arch: ["x64"],
-      },
-    ],
+    icon: "dist/256.ico",
+    target: ["portable"],
     artifactName: "${productName}-Windows-${version}-Setup.${ext}",
   },
   nsis: {
