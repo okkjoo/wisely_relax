@@ -1,4 +1,6 @@
 //TODO 还有一些问题，时间关系..
+/* 目前还没用到 */
+
 import {
   Tray as eTray,
   Menu,

@@ -1,3 +1,4 @@
+/* 目前还没用到 */
 export const SECONDS = 1000;
 export const UNIT = 60;
 export const MINUTES = SECONDS * UNIT;
