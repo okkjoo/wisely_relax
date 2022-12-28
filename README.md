@@ -9,9 +9,21 @@ GitHub 仓库：[https://github.com/okkjoo/wisely_relax](https://github.com/okkj
 - electron
   - electron-vite-react
 
+# 运行
+
+```
+// 安装依赖
+npm install
+// 开发环境
+npm run dev
+// 编译
+npm run build
+```
+
 # 效果
 
 ![1671332930794](image/README/1671332930794.gif)
+更多效果查看：[UI 文档](https://www.yuque.com/qzhou/learning/gvezl557mhckmbco?singleDoc#%20%E3%80%8A%E6%99%BA%E6%85%A7%E4%BC%91%E6%81%AFUI%20%E7%AE%80%E5%8D%95%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E6%95%88%E6%9E%9C%E3%80%8B)
 
 # git commit 简单约束
 
